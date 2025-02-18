@@ -20,7 +20,17 @@ function populateContainer(numOfTilesPerSide) {
     tile.style.borderStyle = "solid";
     tile.style.borderColor = "black";
     tile.style.borderWidth = "1px";
+
+    tile.addEventListener("mouseover", () => {
+      console.log("mousingover");
+      let red = Math.floor(Math.random() * 256);
+      let green = Math.floor(Math.random() * 256);
+      let blue = Math.floor(Math.random() * 256);
+      let backgroundColorValue = `rgb(${red},${green},${blue})`;
+      tile.style.backgroundColor = backgroundColorValue;
+    });
     container.appendChild(tile);
+    
   }
 }
 
