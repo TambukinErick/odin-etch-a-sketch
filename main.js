@@ -40,18 +40,12 @@ function populateContainer() {
   if (numOfTilesPerSide > 100 || numOfTilesPerSide < 0) {
     return;
   }
-  
-  console.log(numOfTilesPerSide);  
-
-  const tileSize = Math.floor(containerSize/numOfTilesPerSide) - 1;
+  const tileSize = Math.floor((containerSize/numOfTilesPerSide) - 0.5);
   
   for (let i = 0; i < numOfTilesPerSide**2; i++){
     const tile = document.createElement("div");
     tile.style.height = `${tileSize}px`;
     tile.style.width = `${tileSize}px`;
-    tile.style.borderStyle = "solid";
-    tile.style.borderColor = "gray";
-    tile.style.borderWidth = "1px";
 
     tile.addEventListener("mouseover", () => {
       let red = Math.floor(Math.random() * 256);
