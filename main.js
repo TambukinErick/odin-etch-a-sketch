@@ -1,6 +1,7 @@
 let numOfTilesPerSide = 16;
 const container = document.querySelector("#container");
 const resizeBtn = document.querySelector("#resize-grid-btn");
+const clearBtn = document.querySelector("#clear-grid-btn")
 const containerSize = container.offsetHeight;
 
 
@@ -25,6 +26,13 @@ resizeBtn.addEventListener("click", () => {
     container.removeChild(container.firstChild);
   }
 
+  populateContainer();
+})
+
+clearBtn.addEventListener("click", () => {
+  while(container.hasChildNodes()) {
+    container.removeChild(container.firstChild);
+  }
   populateContainer();
 })
 
