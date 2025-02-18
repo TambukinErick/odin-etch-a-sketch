@@ -1,28 +1,51 @@
 let numOfTilesPerSide = 16;
 const container = document.querySelector("#container");
-
+const resizeBtn = document.querySelector("#resize-grid-btn");
 const containerSize = container.offsetHeight;
-console.log(containerSize);
-function populateContainer(numOfTilesPerSide) {
-  if (numOfTilesPerSide > 100 || numOfTilesPerSide < 0) {
+
+
+resizeBtn.addEventListener("click", () => {
+  let newNumOfTiles = prompt("Please Enter The New Number Of Tiles Per Side (1-100) only");
+  if(isNaN(newNumOfTiles)) {
+    return;
+  }
+  
+  newNumOfTiles = parseInt(newNumOfTiles);
+  
+  if(Number.isInteger(newNumOfTiles) == false) {
     return;
   }
 
-  const tileSize = Math.floor(
-    containerSize/numOfTilesPerSide
-  ) - 1;
-  console.log(tileSize);
+  if (newNumOfTiles >= 0 && newNumOfTiles <= 100) {
+    numOfTilesPerSide = newNumOfTiles;
+  }
+
+
+  while(container.hasChildNodes()) {
+    container.removeChild(container.firstChild);
+  }
+
+  populateContainer();
+})
+
+function populateContainer() {
+  if (numOfTilesPerSide > 100 || numOfTilesPerSide < 0) {
+    return;
+  }
+  
+  console.log(numOfTilesPerSide);  
+
+  const tileSize = Math.floor(containerSize/numOfTilesPerSide) - 1;
   
   for (let i = 0; i < numOfTilesPerSide**2; i++){
     const tile = document.createElement("div");
     tile.style.height = `${tileSize}px`;
     tile.style.width = `${tileSize}px`;
     tile.style.borderStyle = "solid";
-    tile.style.borderColor = "black";
+    tile.style.borderColor = "gray";
     tile.style.borderWidth = "1px";
 
     tile.addEventListener("mouseover", () => {
-      console.log("mousingover");
       let red = Math.floor(Math.random() * 256);
       let green = Math.floor(Math.random() * 256);
       let blue = Math.floor(Math.random() * 256);
@@ -34,4 +57,4 @@ function populateContainer(numOfTilesPerSide) {
   }
 }
 
-populateContainer(numOfTilesPerSide);
+populateContainer();
